@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<title>md-as-Page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="casual-markdown.css">
+<script src="casual-markdown.js"></script>
+
+<style>  
+body { font-family:Verdana,sans-serif; font-size:14px; line-height:1.5; margin:0; }
+a 	 { background:transparent; text-decoration:none; color:navy } a:active, a:hover { outline-width:0; background:#ffd700 }
+.toc li:hover { background:#ffd700!important }
+
+#header { background:#0057b7; color:white; width:100%; height:50px; }
+#title 	{ float:left; font-size:18px; font-weight:700; padding:8px }
+#menu button, #menu a  { font-family:Verdana,Arial; border:none; padding:4px 8px; color:inherit; background:inherit; }
+#menu button:hover, #menu a:hover { color:#000; background:#ffd700 }
+#menu button:disabled {cursor:not-allowed; opacity:0.5}: disabled *{pointer-events:none}
+#left-panel 	{ position:absolute; left:0; bottom:0; width:380px; top:48px; border:1px solid grey; overflow:auto; padding:8px }
+#right-panel 	{ position:absolute; right:0; bottom:0; left:400px; top:48px; border:1px solid grey; overflow:auto; padding:8px 16px }
+
+@media print{
+  #header, #left-panel { display:none!important }
+  #right-panel { position:relative; width:100%; left:0px; top:0px; border:none; height:auto; overflow:hidden }
+}
+
+@media screen and (min-width: 600px) and (max-width: 900px){ 
+  #header { width:100%; height:80px; }
+  #left-panel 	{ display:none; position:absolute; left:0px; width:100%; top:80px; border:1px solid grey; overflow:auto; padding:4px 8px }
+  #right-panel 	{ position:absolute; left:0px; width:100%;; top:80px; border:1px solid grey; overflow:auto; padding:4px 8px }
+}
+@media screen and (max-width: 600px) {
+  #header { width:100%; height:100px; }
+  #left-panel 	{ display:none; position:absolute; left:0px; width:100%; top:100px; border:1px solid grey; overflow:auto; padding:4px 8px }
+  #right-panel 	{ position:absolute; left:0px; width:100%;; top:100px; border:1px solid grey; overflow:auto; padding:4px 8px }
+}
+</style>
+
+<body onload="md.load( location.href.split('?file=')[1]||'index.md' )">
+
+<div id=header class="theme">
+  <span id=title>casual-markdown</span>
+  <span id=menu style="float:right; padding:12px"></span>
+</div>
+
+<div id=content>
+  <div id="left-panel" style=""></div>
+  <div id="right-panel" style=""></div>
+</div>
+
+<button style="display:none" onclick="toggleHTML()" accesskey=s>ShowHTML</button> 
+<button style="display:none" onclick="darkmode()" accesskey=k>Dark</button> 
+<style id=theme comment="for additional style"></style>
+
+<script>
+/*****************************************************************************
+ * casual-markdown-page - view markdown as web page
+ * last updated on 2022/08/01, v0.60. initial version  
+ *
+ * Copyright (c) 2022, Casualwriter (MIT Licensed)
+ * https://github.com/casualwriter/casual-markdown
+*****************************************************************************/
+
+//=== toggle HTML in right-panel. (this is a hidden function for developer)
+function toggleHTML() {
+  var html = document.getElementById('right-panel').innerHTML
+  if (html.substr(0,5)=='<xmp>') {
+     document.getElementById('right-panel').innerHTML = html.substr(5, html.length-11)
+  } else {
+     document.getElementById('right-panel').innerHTML = '<xmp>' + html.replace(/xmp\>/g,'xmp&gt;') + '</xmp>' 
+  }
+}
+
+//=== apply dark mode style
+function darkmode() {
+  var css = document.getElementById('theme').textContent
+  var dark = ' body, pre, code { background:#333!important; color:#ccc!important } '
+  dark += '\n #header, a {background:#555;} th, tr:nth-child(even) {color:#333}' 
+  document.getElementById('theme').textContent = (css===(md.yaml.style||'')? dark : md.yaml.style||'')
+}
+
+//=== load and parser markdown file. 
+md.load = function (fname) { 
+  var xmlhttp = new XMLHttpRequest();
+  
+  xmlhttp.onload = function (e) {
+  
+    document.getElementById('right-panel').innerHTML = md.html(md.text=this.responseText) + '<br>'
+    document.getElementById('right-panel').scrollTop = 0
+    md.toc( 'right-panel', 'left-panel', { title:'none', scrollspy:'right-panel'} )
+    if (fname.indexOf('#')>0) location.href = fname.substr( fname.indexOf('#') ) 
+    
+    document.title = document.getElementById('title').innerText = md.yaml.title || 'Markdown Page' 
+    document.getElementById('theme').textContent = md.yaml.style ||''
+    
+    var i, html = ''
+    for (i in md.yaml.menu) { 
+       html += '<a href="' + (md.yaml.menu[i].substr(-3)==='.md'? '?file=' : '' )
+       html += md.yaml.menu[i] + '">' + i + '</a>' 
+    }
+    document.getElementById('menu').innerHTML = html
+  }
+  
+  xmlhttp.open("GET", fname , true)
+  xmlhttp.send();
+}
+
+
+//=== touch event for mobile (swipe to show/hide left-panel)
+if (window.innerWidth<900) {
+
+  function toggleTOC(show) {
+    var disp = document.getElementById('left-panel').style.display
+    document.getElementById('left-panel').style.display = show||(disp=='none')? 'block' : 'none'
+    document.getElementById('right-panel').style.display = show||(disp=='none')? 'none' : 'block' 
+  }
+  
+  window.addEventListener( 'touchstart', function(e) { document.touch=e.changedTouches[0] } )
+  
+  window.addEventListener( 'touchend', function(e) { 
+  	 var distX = e.changedTouches[0].clientX - document.touch.clientX
+  	 var distY = e.changedTouches[0].clientY - document.touch.clientY
+  	 if ( Math.abs(distY) < 15 && distX > 90 ) {
+  			e.preventDefault(); 
+        toggleTOC(true)
+  	 } else if ( Math.abs(distY) < 15 && distX < -30 ) {
+  			e.preventDefault(); 
+        toggleTOC(false) 
+  	 }
+    } );
+    
+    document.getElementById('left-panel').onclick = function() {toggleTOC(false)}
+    document.getElementById('title').onclick = function() {toggleTOC()} 
+}
+
+</script>
