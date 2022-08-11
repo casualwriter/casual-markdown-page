@@ -1,6 +1,6 @@
 ## casual-markdown-page
 
-[Casual-Markdown-Page](https://github.com/casualwriter/casual-markdown-page) directly use markdown files as web page or web site.
+[Casual-Markdown-Page](https://github.com/casualwriter/casual-markdown-page) directly use markdown files as web page or web site (ie. markdown-as-webpage).
 
 Just a html file [index.html](source/index.html) to load markdown file into web page by the syntax of `index.html?file={markdown-file.md}`
 
@@ -8,7 +8,7 @@ It is very handy to build simple web-site from markdown files, for example,
 
 * github (self-host): https://raw.githack.com/casualwriter/casual-markdown-page/main/source/index.html
 * github page: https://casualwriter.github.io/casual-markdown
-* github page: https://casualwriter.github.io/powerpage
+* github page: https://casualwriter.github.io/
 
 
 ### Usage Guide
