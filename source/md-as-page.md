@@ -19,9 +19,17 @@ Just a html file [index.html](source/inde.html) to load markdown file into web p
 
 It is very handy to build simple web-site from markdown files (like this page!!), for example, 
 
-* self-host:   https://raw.githack.com/casualwriter/casual-markdown-page/main/source
+* self-host:   https://raw.githack.com/casualwriter/casual-markdown-page/main/source/index.html
 * github page: https://casualwriter.github.io/casual-markdown
 * github page: https://casualwriter.github.io/powerpage
+
+### Features
+
+* single html
+* vanilla javascript, no dependence
+* support all browser (include IE9)
+* dark mode
+* responsive, support mobile
 
 ### Usage Guide
 
