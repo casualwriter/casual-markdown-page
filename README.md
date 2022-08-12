@@ -29,7 +29,7 @@ It is very handy to build simple web-site from markdown files, for example,
 * by default, it will load `index.md` as home page.
 * hotkey [alt-s] to show markdown html for developer
 * hotkey [alt-k] to showpage in dark mode
-* for mobile, swipt right or click on title to show TOC. 
+* for mobile, click on title to show/hide TOC. 
 * use frontmatter for page configuration (title, menu, navigation), for example
 
 ~~~
@@ -56,5 +56,5 @@ with TOC and scrollspy support
 ### Modification History
 
 * 2022/08/11, v0.60, initial release.
-* 2022/08/12, v0.60, add all-in-one version. [index-one.html](source/index-one.html)
+* 2022/08/12, add all-in-one version. [index-one.html](source/index-one.html)
  
