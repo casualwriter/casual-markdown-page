@@ -10,6 +10,7 @@ It is very handy to build simple web-site from markdown files, for example,
 * all-in-one version: https://raw.githack.com/casualwriter/casual-markdown-page/main/source/index-one.html
 * github page: https://casualwriter.github.io/casual-markdown
 * github page: https://casualwriter.github.io/
+* direct render md file: https://casualwriter.github.io/casual-markdown?file=https://raw.githack.com/casualwriter/powerpage/main/README.md
 
 ### Features
 
