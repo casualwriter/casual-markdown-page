@@ -1,7 +1,7 @@
 -----------------------------------------------------------------------------
 github  : https://github.com/casualwriter/casual-markdown 
 title   : Markdown-as-Document
-style   : #header { background: RoyalBlue }
+style   : #header { background: #555 }
 menu    :    
   Home            : index.md
   Supported Syntax: md-syntax.md

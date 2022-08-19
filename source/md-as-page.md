@@ -8,10 +8,10 @@ menu    :
   md-as-Doc       : md-as-doc.md
   md-as-Page      : md-as-page.md
   md-as-Blog      : md-as-blog.md
-  [DarkMode]      : javascript:darkmode()
+  [DarkMode]      : javascript:darkmode() 
 -----------------------------------------------------------------------------
 
-## {{ title }} 
+## {{ title }}  
 
 [Casual-Markdown-Page](https://github.com/casualwriter/casual-markdown-page) directly use markdown files as web page or web site (ie. markdown-as-webpage).
 
