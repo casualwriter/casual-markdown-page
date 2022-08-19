@@ -12,47 +12,44 @@ menu    :
 
 ## {{ title }} 
 
-[casual-markdown]({{github}}) is a super lightweight RegExp-based markdown parser, with TOC and scrollspy support
+[casual-markdown]({{github}}) is lightweight RegExp-based markdown parser, with TOC, scrollspy and frontmatter support.
 
 It revises from simple-markdown-parser of [Powerpage Markdown Document](https://github.com/casualwriter/powerpage-md-document) 
 for the following features
 
-* simple, super lightweight (less than 180 lines)
+* simple, super lightweight (less than 190 lines)
 * vanilla javascript, no dependance
-* support all browsers (IE9+, Chrome, Firfox, Brave, etc..)
+* all browsers supported (IE9+, Chrome, Firfox, Brave, etc..)
 * straight-forward coding style, hopefully readable.
-* support [basic syntax](https://casualwriter.github.io/casual-markdown/casual-markdown-syntax.html) according [Basic Markdown Syntax (markdownguide.org)](https://www.markdownguide.org/basic-syntax/)  
-* support subset of [extended-syntax](https://casualwrit=
-* extendable (by override md.before, md.after, md.formatCode)
+* support [basic+enhanced syntax](https://casualwriter.github.io/casual-markdown/casual-markdown-syntax.html) according [Basic Markdown Syntax (markdownguide.org)](https://www.markdownguide.org/basic-syntax/)  
+* TOC and scrollspy support
+* highlight comments/keywords in code-block
+* frontmatter for simple YAML
+* extendable (by override md.before, md.after, md.formatCode, md.formatYAML)
 
 
 ### Usage Guide
 
-just simply include [casual-markdown.js](https://github.com/casualwriter/casual-markdown/blob/main/source/casual-markdown.js) in web page, (from local or CDN).  
-
-~~~ 
-<link rel="stylesheet" href="casual-markdown.css">
-<script src="casual-markdown.js"></script>
-~~~
-
-or CDN
+just simply include [casual-markdown.js](https://github.com/casualwriter/casual-markdown/blob/main/source/casual-markdown.js) from CDN or local.  
 
 ~~~ 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/casualwriter/casual-markdown/dist/casual-markdown.css">
 <script src="https://cdn.jsdelivr.net/gh/casualwriter/casual-markdown/dist/casual-markdown.js"></script>
 ~~~ 
 
-or github-page (with version)
+or github-page (may specify version no)
 
 ~~~ 
-<link rel="stylesheet" href="https://casualwriter.github.io/dist/casual-markdown@0.82.css">
-<script src="https://casualwriter.github.io/dist/casual-markdown@0.82.js"></script>
+<link rel="stylesheet" href="https://casualwriter.github.io/dist/casual-markdown@0.90.css">
+<script src="https://casualwriter.github.io/dist/casual-markdown@0.90.js"></script>
 ~~~ 
 
+or may download `casual-markdown.js, casual-markdown.css` and include them locally.
 
-#### Usage
 
-Once include the javascript library, markdown parser object `md` is available with below functions.
+### Basic Usage
+
+Once include the javascript library, casual-markdown object `md` is available with below functions.
 
 * `md.html(mdString)` - convert markdown string into html
 * `md.toc( mdElement, tocElement, options)` - generate TOC html to tocElement
@@ -75,12 +72,40 @@ md.toc( 'content', 'toc', { title:'Index', scrollspy:'content' } )
 ~~~
 
 
-#### Advanced Usage
+### Advanced Usage
 
-**Code-block formatter**
+#### TOC from special elements
 
-code-block keywords are hard-code in function md.formatCode(). 
-If do want to highlight different keywords, please override original function md.formatCode() showing below. 
+TOC may retrieve heading from special TAG elements. ``e.g. tag <section>``. 
+
+md.toc() retrieve content from selected tags, using tag name as className. So remember provide additional #toc class to show it nice in TOC dialog.
+
+~~~
+// render TOC from tag:section, and H3, H4
+md.toc( 'content', 'toc', { css: 'section,h3,h4' } )
+
+// remember provide style class for TOC tag, normally set position for left margin
+var style = document.createElement('style');
+style.innerHTML = '#toc .SECTION { margin-left:2em }
+document.head.appendChild(style);
+~~~
+
+#### Activate scrollspy feature
+
+To activate the scrollspy feature, just pass element-ID of scroll content as below.
+
+~~~
+// activate scrollspy. normally is same as md-content, but sometime is document body.
+md.toc( 'content', 'toc', { css: 'h2,h3,h4', scrollspy:'conent' } )
+
+// sometimes scroll content is document body.
+md.toc( 'content', 'toc', { css: 'h3,h4,h5', scrollspy:'body' } )
+~~~
+
+#### Code-block formatter
+
+Code-block keywords will be highlighted, they are hard-code in function md.formatCode(). 
+If do want to highlight different keywords, please revise or override original function md.formatCode(). 
 
 ~~~
 //===== format code-block, highlight remarks/keywords for code/sql
@@ -103,13 +128,15 @@ md.formatCode = function (match, title, block) {
 }
 ~~~
 
-**Extend Parser for enhanced syntax**
+#### Extend Parser for enhanced syntax
 
 to parse every markdown-block, dummy function md.before() and md.after() will be called 
-(i.e. ``md.after( md.parser( md.before(mdText) ) )``). They can be re-defined for enhanced syntax
+(i.e. ``md.after( md.parser( md.before(mdText) ) )``). 
+
+They can be re-defined for enhanced syntax. for example,
 
 ~~~
-// original code
+// original code in casual-markdown.js
 var md = { before: function (str) {return str}, after: function (str) {return str} }
 
 // re-define for extend syntax. e.g. $text$  => <strong>text</strong>
@@ -121,19 +148,48 @@ md.before = function (str) {
 md.after = function (str) { 
    return mdstr = mdstr.replace(/\$\$(\w.*?[^\\])\$\$/gm, '<b>$1</b>')
 }   
+
+document.getElementById('content').innerHTML = md.html()
 ~~~
 
+### Frontmatter for simple YAML
+
+Support frontmatter for simple YAML, only support string value (with 2 level ) meanwhile.
+
+Frontmatter start with `---` (at least three) in first line of markdown document, for example
+
+```
+-----------------------------------------------------------------------------
+title   : Markdown-as-Page
+style   : #header { background: RoyalBlue }
+menu    :    
+  Home            : index.md
+  Supported Syntax: md-syntax.md
+  md-as-Doc       : md-as-doc.md
+  md-as-Page      : md-as-page.md
+  md-as-Blog      : md-as-blog.md
+  [DarkMode]      : javascript:darkmode() 
+-----------------------------------------------------------------------------
+
+## {{ title }}  
+
+....
+```
+
+After called md.html(), js program may refer these values by `md.yaml[name]` (i.e. md.yaml = { title:'Markdown-as-Page', .... }) 
+and html string with ``{{ name }}`` will be replaced with related values
+                                               
 
 ### Applications
 
-* casual-md-page.html?file={md-file}  // show markdown as web-page
-* casual-md-blog.html  // blogging by markdown
-* casual-md-doc.js     // document by markdown
+* Markdown-as-Document: https://github.com/casualwriter/casual-markdown-doc 
+* Markdown-as-WebPage: https://github.com/casualwriter/casual-markdown-page   
+* Markdown-as-Blog: https://github.com/casualwriter/casual-markdown-blog (not ready yet!)
 
 
-### Modification History
+### Update History
 
 * 2022/07/19, v0.80, initial release.
-* 2022/07/22, v0.85, refine toc/scrollspy, extend function, and simple yaml
-* 2022/07/31, v0.90, refine frontmatter for indent yaml; code casual-md-page.html
- 
+* 2022/07/21, v0.82, refine toc/scrollspy, add dummy function for extension
+* 2022/07/22, v0.85, frontmatter for simple YAML
+* 2022/07/31, v0.90, refine frontmatter. code casual-markdown-doc.js, casual-markdown-page.html
