@@ -47,6 +47,20 @@ a 	 { background:transparent; text-decoration:none; color:navy } a:active, a:hov
   #right-panel 	{ position:absolute; left:0px; width:100%;; top:100px; border:1px solid grey; overflow:auto; padding:4px 8px }
 }
 </style>
+
+
+<script>
+allowfromall = "";
+
+allowfromremotehost = "https://example.com/raw/dir-of-md-files/";
+
+allowfromoriginlocation = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '') + "/"; 
+
+allowfrom = allowfromoriginlocation;
+
+</script>
+
+
 <script>
 /*****************************************************************************
  * casual-markdown - a lightweight regexp-base markdown parser with TOC support
@@ -233,7 +247,7 @@ md.toc = function (srcDiv, tocDiv, options ) {
 }  
 </script>
 
-<body onload="md.load( location.href.split('?file=')[1]||'index.md' )">
+<body onload="md.load(allowfrom+location.href.split('?file=')[1]||'index.md' )">
 
 <div id=header class="theme">
   <span id=title>casual-markdown</span>
