@@ -4,6 +4,8 @@
 
 Just a single html file [index.html](source/index.html) to load markdown file into web page by the syntax of `index.html?file={markdown-file.md}`
 
+![](casual-markdown-page.jpg)
+
 It is very handy to build simple web-site from markdown files, for example, 
 
 * github (self-host): https://raw.githack.com/casualwriter/casual-markdown-page/main/source/index.html
