@@ -58,6 +58,9 @@ allowfromoriginlocation = window.location.protocol + "//" + window.location.host
 
 allowfrom = allowfromoriginlocation;
 
+resurlunclean = location.href.split('?file=')[1]||'index.md';
+let resurl = resurlunclean.replaceAll("../",""); 
+
 </script>
 
 
@@ -247,7 +250,7 @@ md.toc = function (srcDiv, tocDiv, options ) {
 }  
 </script>
 
-<body onload="md.load(allowfrom+location.href.split('?file=')[1]||'index.md' )">
+<body onload="md.load(allowfrom+resurl)">
 
 <div id=header class="theme">
   <span id=title>casual-markdown</span>
