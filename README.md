@@ -1,8 +1,8 @@
 ## casual-markdown-page
 
-[Casual-Markdown-Page](https://github.com/casualwriter/casual-markdown-page) directly use markdown files as web page or web site (ie. markdown-as-webpage).
+[Casual-Markdown-Page](https://github.com/casualwriter/casual-markdown-page) directly render markdown files as web page or web site (ie. markdown-as-webpage).
 
-Just a single html file [index.html](source/index.html) to load markdown file into web page by the syntax of `index.html?file={markdown-file.md}`
+Empower by a single html file [index.html](source/index.html), to load markdown file into web page by the syntax of `index.html?file={markdown-file.md}`
 
 ![](casual-markdown-page.jpg)
 
@@ -12,14 +12,18 @@ It is very handy to build simple web-site from markdown files, for example,
 * all-in-one version: https://raw.githack.com/casualwriter/casual-markdown-page/main/source/index-one.html
 * github page: https://casualwriter.github.io/casual-markdown
 * github page: https://casualwriter.github.io/
-* direct render md file: https://casualwriter.github.io/casual-markdown?file=https://raw.githack.com/casualwriter/powerpage/main/README.md
+
+or direct render any md file from web. for example
+
+* this page: https://casualwriter.github.io/casual-markdown?file=https://raw.githack.com/casualwriter/powerpage/main/README.md
+* Build your own X:  https://casualwriter.github.io/casual-markdown?file=https://raw.githubusercontent.com/codecrafters-io/build-your-own-x/master/README.md
 
 ### Features
 
 * single html, all-in-one version [index-one.html](source/index-one.html)
 * vanilla javascript, no dependence
 * support all browser (include IE9)
-* dark mode
+* dark mode, or customized themes
 * responsive, support mobile
 
 ### Usage Guide
