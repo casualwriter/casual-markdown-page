@@ -2,29 +2,36 @@
 github  : https://github.com/casualwriter/casual-markdown 
 title   : Casual-Markdown 
 menu    :    
-  Home            : index.md
   Supported Syntax: md-syntax.md
   md-as-Doc       : md-as-doc.md
   md-as-Page      : md-as-page.md
   md-as-Blog      : md-as-blog.md
-  [DarkMode]      : javascript:darkmode()
+  <img src='sunset.svg' width=16>  : javascript:darkmode()
+  <img src='home.svg' width=16>    : index.md
 -----------------------------------------------------------------------------
+<style>
+  .markdown   { max-width:900px; margin:auto }
+  #header     { background: linear-gradient(to bottom right, #06c, #fc0) } 
+  #left-panel { background: linear-gradient(to bottom right, #eee, #888) }  
+  h1, h2      { border-bottom:1px solid grey }
+  h2, h3, h4  { color:#06c }  
+</style>
 
 ## {{ title }} 
 
-[casual-markdown]({{github}}) is lightweight RegExp-based markdown parser, with TOC, scrollspy and frontmatter support.
+[casual-markdown]({{github}}) is lightweight RegExp-based markdown parser, with TOC, scroll spy and front-matter support.
 
 It revises from simple-markdown-parser of [Powerpage Markdown Document](https://github.com/casualwriter/powerpage-md-document) 
 for the following features
 
 * simple, super lightweight (less than 190 lines)
-* vanilla javascript, no dependance
+* vanilla javascript, no dependence
 * all browsers supported (IE9+, Chrome, Firfox, Brave, etc..)
 * straight-forward coding style, hopefully readable.
 * support [basic+enhanced syntax](https://casualwriter.github.io/casual-markdown/casual-markdown-syntax.html) according [Basic Markdown Syntax (markdownguide.org)](https://www.markdownguide.org/basic-syntax/)  
-* TOC and scrollspy support
+* TOC and scroll-spy support
 * highlight comments/keywords in code-block
-* frontmatter for simple YAML
+* front-matter for simple YAML
 * extendable (by override md.before, md.after, md.formatCode, md.formatYAML)
 
 
@@ -96,7 +103,7 @@ To activate the scrollspy feature, just pass element-ID of scroll content as bel
 
 ~~~
 // activate scrollspy. normally is same as md-content, but sometime is document body.
-md.toc( 'content', 'toc', { css: 'h2,h3,h4', scrollspy:'conent' } )
+md.toc( 'content', 'toc', { css: 'h2,h3,h4', scrollspy:'content' } )
 
 // sometimes scroll content is document body.
 md.toc( 'content', 'toc', { css: 'h3,h4,h5', scrollspy:'body' } )
@@ -154,9 +161,9 @@ document.getElementById('content').innerHTML = md.html()
 
 ### Frontmatter for simple YAML
 
-Support frontmatter for simple YAML, only support string value (with 2 level ) meanwhile.
+Support front-matter for simple YAML, only support string value (with 2 level ) meanwhile.
 
-Frontmatter start with `---` (at least three) in first line of markdown document, for example
+Front-matter start with `---` (at least three) in first line of markdown document, for example
 
 ```
 -----------------------------------------------------------------------------
@@ -191,5 +198,8 @@ and html string with ``{{ name }}`` will be replaced with related values
 
 * 2022/07/19, v0.80, initial release.
 * 2022/07/21, v0.82, refine toc/scrollspy, add dummy function for extension
-* 2022/07/22, v0.85, frontmatter for simple YAML
-* 2022/07/31, v0.90, refine frontmatter. code casual-markdown-doc.js, casual-markdown-page.html
+* 2022/07/22, v0.85, front-matter for simple YAML
+* 2022/07/31, v0.90, refine front-matter. code casual-markdown-doc.js, casual-markdown-page.html
+
+<noscript>casual-markdown, casualwriter, javascript, html, regexp</noscript>
+

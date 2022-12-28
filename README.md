@@ -37,7 +37,7 @@ or direct render any md file from web. for example
 * hotkey [alt-s] to show markdown html for developer
 * hotkey [alt-k] to showpage in dark mode
 * for mobile, click on title to show/hide TOC. 
-* use frontmatter for page configuration (title, menu, navigation), for example
+* use front matter for page configuration (title, menu, navigation), for example
 
 ~~~
 -----------------------------------------------------------------------------
@@ -50,8 +50,15 @@ menu    :
   md-as-Doc       : md-as-doc.md
   md-as-Page      : md-as-page.md
   md-as-Blog      : md-as-blog.md
-  [DarkMode]      : javascript:darkmode()
+  <img src='sunset.svg' width=16>  : javascript:darkmode()
 -----------------------------------------------------------------------------
+<style title=""additional style, optional">
+  .markdown   { max-width:900px; margin:auto }
+  #header     { background: linear-gradient(to bottom right, #06c, #fc0) } 
+  #left-panel { background: linear-gradient(to bottom right, #eee, #888) }  
+  h1, h2      { border-bottom:1px solid grey }
+  h2, h3, h4  { color:#06c }  
+</style>
 
 ## {{ title }} 
 
@@ -64,4 +71,5 @@ with TOC and scrollspy support
 
 * 2022/08/11, v0.60, initial release.
 * 2022/08/12, add all-in-one version. [index-one.html](source/index-one.html)
+* 2022/12/28, v0.62, minor update
  

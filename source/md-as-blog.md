@@ -1,74 +1,123 @@
 -----------------------------------------------------------------------------
-github  : https://github.com/casualwriter/casual-markdown 
 title   : Markdown-as-Blog
 style   : #header { background: linear-gradient(to bottom right, #06c, #fc0); }
 menu    :    
-  Home            : index.md
   Supported Syntax: md-syntax.md
   md-as-Doc       : md-as-doc.md
   md-as-Page      : md-as-page.md
-  md-as-Blog      : md-as-blog.md
-  [DarkMode]      : javascript:darkmode() 
+  <img src='sunset.svg' width=16>  : javascript:darkmode()
+  <img src='home.svg' width=16>    : index.md
+  <img src='github.svg' width=16>  : https://github.com/casualwriter/casual-markdown-blog
 -----------------------------------------------------------------------------
+<style>
+  .markdown   { max-width:900px; margin:auto }
+  #header     { background: linear-gradient(to bottom right, #06c, #fc0) } 
+  #left-panel { background: linear-gradient(to bottom right, #eee, #888) }  
+  h1, h2      { border-bottom:1px solid grey }
+  h2, h3, h4  { color:#06c }  
+</style>
 
-## {{ title }} (to-be-released..)
+## casual-markdown-blog
 
-Build blog site by markdown files. 
+Build blog site by markdown files and single [index.html](source/index.html). 
 
-1. write blog by markdown (e.g. 20220728-use-markdown-for-blog.md)
-2. config site at index.md (title, logo, menu, category, style)
-3. update blog index at index.md
+What we need is config home page at [index.md](https://raw.githubusercontent.com/casualwriter/casual-markdown-blog/main/source/index.md), then start write post in markdown!
 
-### Sample Site 
+It is very handy to build simple blog-site from markdown files, and host on static web hosting. For example, 
 
-* [Casual-Markdown Sample Blog](https://casualwriter.github.io/casual-markdown/blog)
-* [Casualwriter's Blog](https://casualwriter.github.io/blog)
+* Self-host on github: https://raw.githack.com/casualwriter/casual-markdown-blog/main/source/index.html
+* Casual-Markdown's Blog: https://casualwriter.github.io/casual-markdown/blog
+* Dark theme: https://casualwriter.github.io/casual-markdown/blog?theme=dark
+* Dark (always): https://casualwriter.github.io/casual-markdown/blog?home=index-dark.md
+* Nav at right-side: https://casualwriter.github.io/casual-markdown/blog?home=index-right.md 
+
+### Features
+
+* single html
+* no dependence in vanilla javascript
+* support all browser
+* dark mode or dark theme
+* responsive, support mobile
+* customized theme (by css style)
 
 ### Usage Guide
 
-simply put copy [index.html](https://github.com/casualwriter/casual-markdown-page/blob/main/source/index.html) 
-or all-in-one version [index-one.html](https://github.com/casualwriter/casual-markdown-page/blob/main/source/index-one.html) 
-to web server. 
+simply copy [index.html](https://github.com/casualwriter/casual-markdown-page/blob/main/source/index.html) to web server, or fork this repo. 
 
-* config site at index.md (title, logo, menu, category, style)
-* update blog index at index.md, 
-* start write post in markdown. (e.g. 20220818-all-you-need-is-markdown.md)
-                                          
-below is index.md for [Casual-Markdown Sample Blog](./blog)
- 
+* config site at index.md (title, subtitle, header-color, navigation, etc..)
+* start to write blog post using markdown
+* to publish, just add the post in index.md by syntax 
+
+~~~
+* yyyy/mm/dd: [post-title](md-file) { #tags }
+~~~
+
+index.md is also shown as HOME page of blog site. 
+
+below is sample setup from [Sample Blog: index.md](https://raw.githubusercontent.com/casualwriter/casual-markdown-blog/main/source/index.md)
+
 ~~~  
------------------------------------------------------------------------------
-github  : https://github.com/casualwriter/casual-markdown 
-title   : Casual-Markdown Sample Blogs 
-style   : #header { background: linear-gradient(to bottom right, #06c, #fc0); }
-menu    : 
-  Search  : .
-  List    : .
-  About   : about.md
------------------------------------------------------------------------------
-   
-### Aug 2022
-                    
-* 2022/08/19: [markdown is all you need for blogging](20220819-markdown-is-all-need.md) { @image.jpg, #markdown, #blog }
-* 2022/08/10: [is regexp readable?](20220810-is-regexp-readable.md) { @image.jpg, #regexp, #web-dev }
-* 2022/08/03: [my dream web browser](20220803-my-dream-web-browser.md) { @image.jpg, #web, #dev }
+--------------------------------------------------------------------------
+title      : Casual-Markdown's Blog 
+subtitle   : Simple is the best
+nav-group  : featured, new-3, tags, months
+nav-width  : 320px
+css-header : background:linear-gradient(to bottom right, #06c, #fc0); color:white
+menu       : 
+   Home    : ?
+   Github  : https://github.com/casualwriter/casual-markdown-blog
+   Dark    : javascript:darkmode()
+   About   : ?page=about.md
+--------------------------------------------------------------------------
 
-### July 2022
-                    
-* 2022/07/30: [frontmatter for simple YAML](20220730-frontmatter.md) { @pp-web-crawler.jpg, #markdown, #regexp }
-* 2022/07/22: [release casual-markdown v0.85](20220722-casual-markdown-v0.85.md) {#on-top, #markdown, #regexp, @pp-web-crawler.jpg }
+<style comment="additional style">
+......
+</style>
 
-### Oct 2021
+<div id="md-post">
 
-* 2021/10/20: [code a markdown editor within 80 lines](20211020-code-markdown-editor.md) { #powerpage, #markdown }
-* 2021/07/20: [crawl web page by powerpage-web-crawler](20210720-powerpage-web-crawler.md) { #powerpage, @image.jpg }
-* 2021/06/18: [develop html/css/jsavscript application by PowerPage](20210618-html-app-by-powerpage.md) { #on-top, #powerpage, @image.jpg }
+home page in markdown syntax...
 
+## Archive
+
+* yyyy/mm/dd: [Post Title](md file)  { #tag1, #tag2 }
+* yyyy/mm/dd: [Post Title](md file)  { #tag1, #tag2 }
+...
+* yyyy/mm/dd: [Post Title](md file)  { #tag1, #tag2 }
+
+</div>
 ~~~ 
 
+### frontmatter for blog setup
 
-### To-Do
+* `title` := blog title
+* `subtitle` := subtitle
+* `nav-group` := featured // show blogs tagged by `featured`
+* `nav-group` := new-n    // show new posts (n=number of new post)
+* `nav-group` := tags     // show tags list
+* `nav-group` := months   // show archive by month
+* `nav-width` := 320px    // width of nav-panel
+* `css-header` := background:green   // css style for header
+* `theme` := dark        // show by dark theme (only dark theme available now)
+* `menu` :=  ...         // top-menu 
 
-* todo: code casual-markdown-blog.html for basic blogs site
-* todo: more customized options
- 
+### URL Parameters
+
+* `index.html?post={md-post.md}`  show post of md-post.md 
+* `index.html?tag={tag-name}`  list posts for specified tag
+* `index.html?month=2022-08`  list posts for specified month
+* `index.html?theme=dark`  show in dark theme
+* `index.html?home=index-dark.md`  show blog site using index-dark.md as home/index
+* `index.html?home=my-blog.md&theme=dark&pos=post01.md` show post01.md using my-blog.md in dark mode.
+
+### Notes
+
+* [alt-k] to toggle dark mode
+* [alt-s] to view in html code (for developer)
+* [ctrl-p] to print post
+* in mobile mode (width<900), click on title to toggle nav panel
+
+### History
+
+* 2022/08/24: 0.60, first release
+* to-do, more themes

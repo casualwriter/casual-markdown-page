@@ -1,28 +1,37 @@
 -----------------------------------------------------------------------------
-github  : https://github.com/casualwriter/casual-markdown 
 title   : Markdown-as-Document
-style   : #header { background: #555 }
 menu    :    
-  Home            : index.md
   Supported Syntax: md-syntax.md
-  md-as-Doc       : md-as-doc.md
   md-as-Page      : md-as-page.md
   md-as-Blog      : md-as-blog.md
-  [DarkMode]      : javascript:darkmode()
+  <img src='sunset.svg' width=16>  : javascript:darkmode()
+  <img src='home.svg' width=16>    : index.md
+  <img src='github.svg' width=16>  : https://github.com/casualwriter/casual-markdown-doc
 -----------------------------------------------------------------------------
+<style>
+  .markdown   { max-width:900px; margin:auto }
+  #header     { background: linear-gradient(to bottom right, #06c, #fc0) } 
+  #left-panel { background: linear-gradient(to bottom right, #eee, #888) }  
+  h1, h2      { border-bottom:1px solid grey }
+  h2, h3, h4  { color:#06c }  
+</style>
 
 ## {{ title }} 
 
-[Casual-Markdown-Doc](https://github.com/casualwriter/casual-markdown-doc) provide a quick solution 
-to use markdown as document.
+[Casual-Markdown-Doc](https://github.com/casualwriter/casual-markdown-doc) is a handy solution to use markdown as document.
 
-* include javascript lib `casual-markdown-doc.js`
-* include css style `casual-markdown-doc.css`
+just add below 4 lines in the beginning of html file, then start write document in markdown format!
 
-then start write document in markdown format!
+~~~
+<!DOCTYPE html>
+<link  href="https://casualwriter.github.io/dist/casual-markdown-doc.css" rel="stylesheet">
+<script src="https://casualwriter.github.io/dist/casual-markdown-doc.js"></script>
+<body title="Supported Syntax of Casual-Markdown">
 
-check the sample document
-at https://casualwriter.github.io/casual-markdown/casual-markdown-syntax.html
+start write document in markdown format!
+~~~
+
+check the sample document at https://casualwriter.github.io/casual-markdown/casual-markdown-syntax.html
 
 ### Credit
 
@@ -32,7 +41,7 @@ build-in css, vanilla javascript without any dependence. (support all browsers i
 
 ### Usage Guide
 
-1. create your document in html format. e.g. `casual-markdown-syntax.html` 
+1. create document in html format. e.g. `casual-markdown-syntax.html` 
 2. use below first 4 line as header, and start draft content in markdown format
 3. at line 4, revise title to your document title
 4. start draft document in markdown format
@@ -42,8 +51,11 @@ build-in css, vanilla javascript without any dependence. (support all browsers i
 <link  href="https://casualwriter.github.io/dist/casual-markdown-doc.css" rel="stylesheet">
 <script src="https://casualwriter.github.io/dist/casual-markdown-doc.js"></script>
 <body title="Supported Syntax of Casual-Markdown">
+
 ## Heading
+
 content in markdown format
+
 ~~~
 
 or include `casual-markdown-doc.js` from local
@@ -53,7 +65,9 @@ or include `casual-markdown-doc.js` from local
 <link  href="casual-markdown-doc.css" rel="stylesheet">
 <script src="casual-markdown-doc.js"></script>
 <body title="Supported Syntax of Casual-Markdown">
+
 ## Heading
+
 content in markdown format
 ~~~
 
@@ -62,7 +76,7 @@ content in markdown format
 * table-of-content will be auto-generated from markdown heading
 * hotkey [alt-t] to toggle table-of-content popup-box
 * hotkey [ctrl-p] to print document, table-of-content will be inserted as first page automatically.
-* if donot want table-of-content printout. please close TOC box first, then print document.
+* if do not want table-of-content printout. please close TOC box first, then print document.
 
 ### How it works
 

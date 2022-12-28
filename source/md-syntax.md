@@ -1,14 +1,19 @@
 -----------------------------------------------------------------------------
-github  : https://github.com/casualwriter/casual-markdown 
-title   : Supported Syntax of Casual-Markdown 
+title   : Supported Syntax of Casual-Markdown
 menu    :    
-  Home            : index.md
-  Supported Syntax: md-syntax.md
   md-as-Doc       : md-as-doc.md
   md-as-Page      : md-as-page.md
   md-as-Blog      : md-as-blog.md
-  [DarkMode]      : javascript:darkmode()
+  <img src='sunset.svg' width=16>  : javascript:darkmode()
+  <img src='home.svg' width=16>    : index.md
+  <img src='github.svg' width=16>  : https://github.com/casualwriter/casual-markdown
 -----------------------------------------------------------------------------
+<style>
+#header     { background: linear-gradient(to bottom right, #06c, #fc0) } 
+#left-panel { background: linear-gradient(to bottom right, #eee, #888) }  
+h1, h2      { border-bottom:1px solid grey }
+h2, h3, h4  { color:#06c }  
+</style>
 
 ## Introduction
 

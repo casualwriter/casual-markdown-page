@@ -5,7 +5,7 @@
 <script src="https://cdn.jsdelivr.net/gh/casualwriter/casual-markdown/dist/casual-markdown.js"></script>
 
 <style>  
-body { font-family:Verdana,sans-serif; font-size:14px; line-height:1.5; margin:0; }
+body { font-family:Verdana,sans-serif; font-size:14px; line-height:1.5; margin:0; display:none; }
 a 	 { background:transparent; text-decoration:none; color:navy } a:active, a:hover { outline-width:0; background:#ffd700 }
 .toc li:hover { background:#ffd700!important }
 
@@ -53,7 +53,7 @@ a 	 { background:transparent; text-decoration:none; color:navy } a:active, a:hov
 <script>
 /*****************************************************************************
  * casual-markdown-page - view markdown as web page
- * last updated on 2022/08/01, v0.60. initial version  
+ * last updated on 2022/12/28, v0.62. 
  *
  * Copyright (c) 2022, Casualwriter (MIT Licensed)
  * https://github.com/casualwriter/casual-markdown
@@ -73,7 +73,8 @@ function toggleHTML() {
 function darkmode() {
   var css = document.getElementById('theme').textContent
   var dark = ' body, pre, code { background:#333!important; color:#ccc!important } '
-  dark += '\n #header, a {background:#555;} th, tr:nth-child(even) {color:#333}' 
+  dark += '\n #header, a  {background:#555;} th, tr:nth-child(even) {color:#333} '
+  dark += '\n .active { color:white!important } #left-panel {background:#444;}  ' 
   document.getElementById('theme').textContent = (css===(md.yaml.style||'')? dark : md.yaml.style||'')
 }
 
@@ -86,11 +87,13 @@ md.load = function (fname) {
     document.getElementById('right-panel').innerHTML = md.html(md.text=this.responseText) + '<br>'
     document.getElementById('right-panel').scrollTop = 0
     md.toc( 'right-panel', 'left-panel', { title:'none', scrollspy:'right-panel'} )
-    if (fname.indexOf('#')>0) location.href = fname.substr( fname.indexOf('#') ) 
     
-    document.title = document.getElementById('title').innerText = md.yaml.title || 'Markdown Page' 
+    document.title = document.getElementById('title').innerHTML = md.yaml.title || 'Markdown Page' 
     document.getElementById('theme').textContent = md.yaml.style ||''
-    
+
+    document.body.style.display='block';
+    if (fname.indexOf('#')>0) location.href = fname.substr( fname.indexOf('#') ) 
+	
     var i, html = ''
     for (i in md.yaml.menu) { 
        html += '<a href="' + (md.yaml.menu[i].substr(-3)==='.md'? '?file=' : '' )
